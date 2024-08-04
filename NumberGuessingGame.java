@@ -8,10 +8,13 @@ public class NumberGuessingGame {
         Random random = new Random();
         boolean playAgain = true;
         int roundsWon = 0;
+        int roundsLost = 0;
+        int totalRounds = 0;
 
         System.out.println("Welcome to the Number Guessing Game!");
 
         while (playAgain) {
+            totalRounds++; // Increment total rounds
             int numberToGuess = random.nextInt(100) + 1;
             int numberOfAttempts = 0;
             int maxAttempts = 10;
@@ -54,9 +57,12 @@ public class NumberGuessingGame {
 
             if (!hasWon) {
                 System.out.println("Sorry, you've used all your attempts. The correct number was: " + numberToGuess);
+                roundsLost++;
             }
 
+            System.out.println("Total Rounds Played: " + totalRounds);
             System.out.println("Rounds Won: " + roundsWon);
+            System.out.println("Rounds Lost: " + roundsLost);
 
             System.out.print("Do you want to play again? (yes/no): ");
             scanner.nextLine(); // Consume the newline character
@@ -64,7 +70,7 @@ public class NumberGuessingGame {
             playAgain = response.equalsIgnoreCase("yes");
         }
 
-        System.out.println("Thank you for playing! You won " + roundsWon + " rounds. Goodbye.");
+        System.out.println("Thank you for playing! You won " + roundsWon + " rounds, lost " + roundsLost + " rounds, and played a total of " + totalRounds + " rounds. Goodbye.");
         scanner.close();
     }
 }
