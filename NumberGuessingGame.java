@@ -7,6 +7,7 @@ public class NumberGuessingGame {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         boolean playAgain = true;
+        int roundsWon = 0;
 
         System.out.println("Welcome to the Number Guessing Game!");
 
@@ -18,6 +19,7 @@ public class NumberGuessingGame {
 
             System.out.println("I have generated a random number between 1 and 100.");
             System.out.println("You have " + maxAttempts + " attempts to guess it.");
+            System.out.println(); // Blank line
 
             while (numberOfAttempts < maxAttempts) {
                 System.out.print("Enter your guess: ");
@@ -35,13 +37,17 @@ public class NumberGuessingGame {
                         System.out.println("Too high!");
                     } else {
                         System.out.println("Congratulations! You guessed the correct number.");
+                        System.out.println(); // Blank line
                         hasWon = true;
+                        roundsWon++;
                         break;
                     }
 
                     System.out.println("Attempts left: " + (maxAttempts - numberOfAttempts));
+                    System.out.println(); // Blank line
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a valid number.");
+                    System.out.println(); // Blank line
                     scanner.next(); // Clear the invalid input
                 }
             }
@@ -50,13 +56,15 @@ public class NumberGuessingGame {
                 System.out.println("Sorry, you've used all your attempts. The correct number was: " + numberToGuess);
             }
 
+            System.out.println("Rounds Won: " + roundsWon);
+
             System.out.print("Do you want to play again? (yes/no): ");
             scanner.nextLine(); // Consume the newline character
             String response = scanner.nextLine();
             playAgain = response.equalsIgnoreCase("yes");
         }
 
-        System.out.println("Thank you for playing! Goodbye.");
+        System.out.println("Thank you for playing! You won " + roundsWon + " rounds. Goodbye.");
         scanner.close();
     }
 }
